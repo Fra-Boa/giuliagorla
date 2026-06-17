@@ -145,10 +145,10 @@ body{
 }
 
 .hero-image{
-    width:100%;
-    min-height:100vh;
- 
-    display:block;
+    width: 115%;
+    /* max-height: 85vh; */
+    height: auto;
+    display: block;
 }
 
 /* MOBILE HEADER */
