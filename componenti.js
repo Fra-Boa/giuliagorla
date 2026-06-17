@@ -17,4 +17,34 @@ document.addEventListener("DOMContentLoaded", () => {
         sidebar.classList.toggle("open");
     });
 
+
 });
+
+
+
+const images = document.querySelectorAll(".carousel-track img");
+const prevBtn = document.querySelector(".carousel-btn.prev");
+const nextBtn = document.querySelector(".carousel-btn.next");
+
+let index = 0;
+
+function showImage(i){
+    images.forEach(img => img.classList.remove("active"));
+    images[i].classList.add("active");
+}
+
+function next(){
+    index = (index + 1) % images.length;
+    showImage(index);
+}
+
+function prev(){
+    index = (index - 1 + images.length) % images.length;
+    showImage(index);
+}
+
+nextBtn.addEventListener("click", next);
+prevBtn.addEventListener("click", prev);
+
+// inizializza
+showImage(index);
