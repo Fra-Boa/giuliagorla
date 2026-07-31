@@ -360,9 +360,9 @@ body{
     right:10px;
 }
 
-.project-title-space {
-    height: 50px;
-} 
+.about .project-text {
+    margin-top: 80px;
+}
 
 /* MOBILE */
 
