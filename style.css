@@ -361,7 +361,7 @@ body{
 }
 
 .about .project-text {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 /* MOBILE */
@@ -544,8 +544,6 @@ body{
     .project-title{
         font-size:2rem;
     }
-
-
 
 
     .project-subtitle{
