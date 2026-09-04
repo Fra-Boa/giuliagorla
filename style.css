@@ -264,6 +264,11 @@ body{
     display:block;
 }
 
+/* SOLO la gallery di Fattore Umano */
+.fattore-gallery img:first-child{
+    grid-column:1 / -1;
+}
+
 
 .carousel{
     display:block;
