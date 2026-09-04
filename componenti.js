@@ -89,3 +89,193 @@ document.addEventListener("DOMContentLoaded", () => {
     // inizializza
     showImage(0);
 });
+
+
+
+/* =========================
+   LIGHTBOX GALLERY
+   ========================= */
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightbox-image");
+
+const closeButton = document.getElementById("lightbox-close");
+const prevButton = document.getElementById("lightbox-prev");
+const nextButton = document.getElementById("lightbox-next");
+
+const galleryImages = document.querySelectorAll(
+    ".gallery img, .gallery-featured"
+);
+
+let currentImage = 0;
+
+
+/* CONTROLLA SE IL LIGHTBOX ESISTE */
+
+if (
+    lightbox &&
+    lightboxImage &&
+    closeButton &&
+    prevButton &&
+    nextButton &&
+    galleryImages.length > 0
+) {
+
+
+    /* =========================
+       APRI LIGHTBOX
+       ========================= */
+
+    galleryImages.forEach((image, index) => {
+
+        image.addEventListener("click", () => {
+
+            currentImage = index;
+
+            showImage();
+
+            lightbox.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+
+        });
+
+    });
+
+
+    /* =========================
+       MOSTRA FOTO
+       ========================= */
+
+    function showImage(){
+
+        const image = galleryImages[currentImage];
+
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+
+    }
+
+
+    /* =========================
+       FOTO SUCCESSIVA
+       ========================= */
+
+    function nextImage(){
+
+        currentImage++;
+
+        if(currentImage >= galleryImages.length){
+            currentImage = 0;
+        }
+
+        showImage();
+
+    }
+
+
+    /* =========================
+       FOTO PRECEDENTE
+       ========================= */
+
+    function previousImage(){
+
+        currentImage--;
+
+        if(currentImage < 0){
+            currentImage = galleryImages.length - 1;
+        }
+
+        showImage();
+
+    }
+
+
+    /* =========================
+       PULSANTE NEXT
+       ========================= */
+
+    nextButton.addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        nextImage();
+
+    });
+
+
+    /* =========================
+       PULSANTE PREV
+       ========================= */
+
+    prevButton.addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        previousImage();
+
+    });
+
+
+    /* =========================
+       CHIUDI LIGHTBOX
+       ========================= */
+
+    function closeLightbox(){
+
+        lightbox.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    closeButton.addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        closeLightbox();
+
+    });
+
+
+    /* =========================
+       CLIC FUORI DALLA FOTO
+       ========================= */
+
+    lightbox.addEventListener("click", (event) => {
+
+        if(event.target === lightbox){
+
+            closeLightbox();
+
+        }
+
+    });
+
+
+    /* =========================
+       TASTIERA
+       ========================= */
+
+    document.addEventListener("keydown", (event) => {
+
+        if(!lightbox.classList.contains("active")){
+            return;
+        }
+
+        if(event.key === "Escape"){
+            closeLightbox();
+        }
+
+        if(event.key === "ArrowRight"){
+            nextImage();
+        }
+
+        if(event.key === "ArrowLeft"){
+            previousImage();
+        }
+
+    });
+
+}
