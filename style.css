@@ -246,7 +246,6 @@ body{
     color:#666;
 }
 
-
 .gallery{
     margin-top:4rem;
 
@@ -260,29 +259,36 @@ body{
 
 .gallery img{
     width:100%;
-
     display:block;
 }
+
+
+/* SOLO FATTTORE UMANO */
 
 .fattore-gallery{
     margin-top:4rem;
     width:100%;
+    display:block;
 }
 
+
 /* Prima foto */
+
 .fattore-gallery .gallery-featured{
     width:100%;
     display:block;
     margin-bottom:1rem;
 }
 
-/* Masonry */
-.gallery-masonry{
+
+/* Griglia masonry sotto la prima foto */
+
+.fattore-gallery .gallery-masonry{
     columns:2;
     column-gap:1rem;
 }
 
-.gallery-masonry img{
+.fattore-gallery .gallery-masonry img{
     width:100%;
     display:block;
     margin-bottom:1rem;
@@ -290,7 +296,6 @@ body{
     break-inside:avoid;
     -webkit-column-break-inside:avoid;
 }
-
 
 .carousel{
     display:block;
