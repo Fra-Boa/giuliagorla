@@ -313,7 +313,7 @@ body{
 /* ==========================================
    COMPOSIZIONE
    ========================================== */
-
+/*
 .g1 {
     grid-column: span 4;
     grid-row: span 2;
@@ -419,6 +419,8 @@ body{
     grid-column: span 6;
     grid-row: span 3;
 }
+*/
+
 
 .carousel{
     display:block;
@@ -927,4 +929,235 @@ body{
         width:100%;
         display:block;
     }
+}
+
+
+
+/* ==========================================================
+   NUOVA VERSIONE — FATTORE UMANO
+   ==========================================================
+
+   Questa sezione sovrascrive temporaneamente alcune regole
+   precedenti senza cancellarle.
+
+   Per tornare alla versione originale:
+   elimina/commenta questa intera sezione.
+   ========================================================== */
+
+
+/* ==========================================================
+   1. GRIGLIA FATTORE UMANO
+   ========================================================== */
+
+/*
+VERSIONE ORIGINALE:
+
+.fattore-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 100px;
+    gap: 8px;
+}
+*/
+
+.fattore-grid {
+    width: 100%;
+
+    /*
+       CSS columns permette alle immagini di mantenere
+       la loro altezza naturale.
+    */
+    column-count: 3;
+    column-gap: 8px;
+
+    /*
+       Evita che il browser distribuisca le immagini
+       in modo strano tra le colonne.
+    */
+    column-fill: balance;
+}
+
+
+/* ==========================================================
+   2. IMMAGINI
+   ========================================================== */
+
+/*
+VERSIONE ORIGINALE:
+
+.fattore-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+}
+*/
+
+.fattore-grid img {
+    width: 100%;
+    height: auto;
+
+    /*
+       IMPORTANTE:
+       niente object-fit: cover.
+       L'immagine mantiene quindi il suo rapporto originale.
+    */
+    object-fit: contain;
+
+    display: block;
+    cursor: pointer;
+
+    /*
+       Impedisce al browser di spezzare un'immagine
+       tra una colonna e l'altra.
+    */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+
+    /*
+       Ogni foto viene separata verticalmente
+       dalla successiva.
+    */
+    margin-bottom: 8px;
+}
+
+
+
+
+/* ==========================================================
+   3. DISATTIVIAMO LA VECCHIA COMPOSIZIONE
+   ==========================================================
+
+   I vecchi span non servono più con il masonry layout.
+   Li lasciamo nel CSS originale, ma li sovrascriviamo qui.
+   ========================================================== */
+
+
+/*
+VERSIONE ORIGINALE:
+
+.g1  { grid-column: span 4; grid-row: span 2; }
+.g2  { grid-column: span 4; grid-row: span 2; }
+.g3  { grid-column: span 4; grid-row: span 2; }
+
+.g4  { grid-column: span 6; grid-row: span 3; }
+.g5  { grid-column: span 3; grid-row: span 3; }
+.g6  { grid-column: span 3; grid-row: span 3; }
+
+.g7  { grid-column: span 4; grid-row: span 3; }
+.g8  { grid-column: span 4; grid-row: span 3; }
+.g9  { grid-column: span 4; grid-row: span 3; }
+
+.g10 { grid-column: span 3; grid-row: span 3; }
+.g11 { grid-column: span 6; grid-row: span 3; }
+.g12 { grid-column: span 3; grid-row: span 3; }
+
+.g13 { grid-column: span 4; grid-row: span 2; }
+.g14 { grid-column: span 4; grid-row: span 2; }
+.g15 { grid-column: span 4; grid-row: span 3; }
+
+.g16 { grid-column: span 5; grid-row: span 3; }
+.g17 { grid-column: span 3; grid-row: span 3; }
+.g18 { grid-column: span 4; grid-row: span 3; }
+
+.g19 { grid-column: span 6; grid-row: span 3; }
+.g20 { grid-column: span 6; grid-row: span 3; }
+*/
+
+
+.g1,
+.g2,
+.g3,
+.g4,
+.g5,
+.g6,
+.g7,
+.g8,
+.g9,
+.g10,
+.g11,
+.g12,
+.g13,
+.g14,
+.g15,
+.g16,
+.g17,
+.g18,
+.g19,
+.g20 {
+    grid-column: auto;
+    grid-row: auto;
+}
+
+
+/* ==========================================================
+   4. DESKTOP — 3 COLONNE
+   ========================================================== */
+
+@media (min-width:901px){
+
+    .fattore-grid {
+        column-count: 3;
+        column-gap: 8px;
+    }
+
+}
+
+
+/* ==========================================================
+   5. SCHERMI MEDI
+   ========================================================== */
+
+@media (min-width:901px) and (max-width:1200px){
+
+    .fattore-grid {
+        column-count: 2;
+        column-gap: 8px;
+    }
+
+}
+
+
+/* ==========================================================
+   6. MOBILE
+   ========================================================== */
+
+@media (max-width:900px){
+
+    /*
+       VERSIONE ORIGINALE DELLA PAGINA:
+
+       .fattore-grid {
+           ...
+       }
+
+       Non era presente una vera regola mobile per
+       .fattore-grid, quindi la vecchia griglia a 12
+       colonne continuava a essere utilizzata.
+
+       Qui la trasformiamo in una singola colonna.
+    */
+
+    .fattore-grid {
+        width: 100%;
+
+        column-count: 1;
+        column-gap: 0;
+    }
+
+
+    .fattore-grid img {
+        width: 100%;
+        height: auto;
+
+        object-fit: contain;
+
+        margin-bottom: 8px;
+
+        break-inside: avoid;
+        -webkit-column-break-inside: avoid;
+    }
+
 }
