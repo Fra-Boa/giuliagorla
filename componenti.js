@@ -541,3 +541,251 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+/* ==========================================================
+   CAROSELLO 3 FOTO VERTICALI
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const carousel = document.querySelector(".vertical-carousel");
+
+    if (!carousel) return;
+
+    const viewport = carousel.querySelector(
+        ".vertical-carousel-viewport"
+    );
+
+    const track = carousel.querySelector(
+        ".vertical-carousel-track"
+    );
+
+    const images = Array.from(
+        track.querySelectorAll("img")
+    );
+
+    const prevButton = carousel.querySelector(
+        ".vertical-carousel-btn.prev"
+    );
+
+    const nextButton = carousel.querySelector(
+        ".vertical-carousel-btn.next"
+    );
+
+
+    let index = 0;
+
+
+    /* ======================================================
+       CALCOLA QUANTO SPOSTARE
+       ====================================================== */
+
+    function getStep(){
+
+        const image = images[0];
+
+        if (!image) return 0;
+
+        const imageWidth = image.getBoundingClientRect().width;
+
+        const trackStyle = window.getComputedStyle(track);
+
+        const gap = parseFloat(trackStyle.columnGap) || 0;
+
+        return imageWidth + gap;
+
+    }
+
+
+    /* ======================================================
+       AGGIORNA CAROSELLO
+       ====================================================== */
+
+    function updateCarousel(){
+
+        const step = getStep();
+
+        track.style.transform =
+            `translateX(-${index * step}px)`;
+
+    }
+
+
+    /* ======================================================
+       SUCCESSIVA
+       ====================================================== */
+
+    function next(){
+
+        /*
+           Ci sono sempre 3 foto visibili.
+
+           Quindi l'ultima posizione possibile
+           è quella che lascia le ultime 3 foto
+           dentro il viewport.
+        */
+
+        const maxIndex = images.length - 3;
+
+        if(index < maxIndex){
+
+            index++;
+
+            updateCarousel();
+
+        }
+
+    }
+
+
+    /* ======================================================
+       PRECEDENTE
+       ====================================================== */
+
+    function prev(){
+
+        if(index > 0){
+
+            index--;
+
+            updateCarousel();
+
+        }
+
+    }
+
+
+    /* ======================================================
+       BOTTONI
+       ====================================================== */
+
+    nextButton.addEventListener(
+        "click",
+        next
+    );
+
+    prevButton.addEventListener(
+        "click",
+        prev
+    );
+
+
+    /* ======================================================
+       SWIPE TOUCH
+       ====================================================== */
+
+    let startX = 0;
+    let startY = 0;
+
+    viewport.addEventListener(
+        "touchstart",
+        function(event){
+
+            startX = event.touches[0].clientX;
+            startY = event.touches[0].clientY;
+
+        },
+        {passive:true}
+    );
+
+
+    viewport.addEventListener(
+        "touchend",
+        function(event){
+
+            const endX = event.changedTouches[0].clientX;
+            const endY = event.changedTouches[0].clientY;
+
+            const differenceX = endX - startX;
+            const differenceY = endY - startY;
+
+
+            /*
+               Evitiamo di interpretare
+               uno scroll verticale come swipe.
+            */
+
+            if(
+                Math.abs(differenceX) > 40 &&
+                Math.abs(differenceX) > Math.abs(differenceY)
+            ){
+
+                if(differenceX < 0){
+
+                    next();
+
+                }else{
+
+                    prev();
+
+                }
+
+            }
+
+        },
+        {passive:true}
+    );
+
+
+    /* ======================================================
+       MOUSE DRAG
+       ====================================================== */
+
+    let mouseStartX = null;
+
+    viewport.addEventListener(
+        "mousedown",
+        function(event){
+
+            mouseStartX = event.clientX;
+
+        }
+    );
+
+    viewport.addEventListener(
+        "mouseup",
+        function(event){
+
+            if(mouseStartX === null) return;
+
+            const difference =
+                event.clientX - mouseStartX;
+
+            if(Math.abs(difference) > 40){
+
+                if(difference < 0){
+
+                    next();
+
+                }else{
+
+                    prev();
+
+                }
+
+            }
+
+            mouseStartX = null;
+
+        }
+    );
+
+
+    /* ======================================================
+       RESIZE
+       ====================================================== */
+
+    window.addEventListener(
+        "resize",
+        function(){
+
+            updateCarousel();
+
+        }
+    );
+
+
+    updateCarousel();
+
+});
