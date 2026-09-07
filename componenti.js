@@ -279,3 +279,265 @@ if (
     });
 
 }
+
+
+
+
+
+
+/* ==========================================================
+   FATTORE UMANO — JUSTIFIED GALLERY
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const gallery = document.querySelector(".fattore-grid");
+
+    if (!gallery) return;
+
+    const images = Array.from(
+        gallery.querySelectorAll(":scope > img")
+    );
+
+    if (!images.length) return;
+
+
+    /*
+       Composizione delle righe.
+
+       Ogni numero corrisponde alla classe
+       g1, g2, g3 ecc.
+    */
+
+    const rows = [
+        ["g1", "g2", "g3"],
+        ["g4", "g5", "g6"],
+        ["g7", "g8", "g9"],
+        ["g10", "g11", "g12"],
+        ["g13", "g14", "g15"],
+        ["g16", "g17", "g18"],
+        ["g19", "g20"]
+    ];
+
+
+    /*
+       Creiamo automaticamente le righe.
+    */
+
+    rows.forEach(function (rowClasses) {
+
+        const row = document.createElement("div");
+
+        row.className = "fattore-row";
+
+        rowClasses.forEach(function (className) {
+
+            const image = images.find(function (img) {
+                return img.classList.contains(className);
+            });
+
+            if (image) {
+                row.appendChild(image);
+            }
+
+        });
+
+        gallery.appendChild(row);
+
+    });
+
+
+    /*
+       Calcola la composizione perfetta.
+    */
+
+    function layoutGallery() {
+
+        const allRows = gallery.querySelectorAll(".fattore-row");
+
+        /*
+           Su mobile lasciamo che ogni immagine
+           occupi tutta la larghezza.
+        */
+
+        if (window.innerWidth <= 900) {
+
+            allRows.forEach(function (row) {
+
+                row.style.height = "auto";
+
+                const rowImages = row.querySelectorAll("img");
+
+                rowImages.forEach(function (img) {
+
+                    img.style.width = "100%";
+                    img.style.height = "auto";
+
+                });
+
+            });
+
+            return;
+        }
+
+
+        /*
+           DESKTOP
+        */
+
+        allRows.forEach(function (row) {
+
+            const rowImages = Array.from(
+                row.querySelectorAll("img")
+            );
+
+            if (!rowImages.length) return;
+
+
+            /*
+               Recuperiamo il rapporto originale
+               di ogni fotografia.
+            */
+
+            const ratios = rowImages.map(function (img) {
+
+                if (!img.naturalWidth || !img.naturalHeight) {
+                    return 1;
+                }
+
+                return img.naturalWidth / img.naturalHeight;
+
+            });
+
+
+            /*
+               Somma dei rapporti.
+
+               Esempio:
+
+               verticale + orizzontale + orizzontale
+
+               0.66 + 1.50 + 1.50
+            */
+
+            const totalRatio = ratios.reduce(
+                function (sum, ratio) {
+                    return sum + ratio;
+                },
+                0
+            );
+
+
+            /*
+               Larghezza reale disponibile.
+            */
+
+            const rowWidth = gallery.clientWidth;
+
+
+            /*
+               Altezza perfetta della riga.
+
+               Se:
+
+               larghezza = 1000px
+               rapporto totale = 3.66
+
+               allora:
+
+               altezza = 1000 / 3.66
+            */
+
+            const rowHeight = rowWidth / totalRatio;
+
+
+            /*
+               Impostiamo l'altezza della riga.
+            */
+
+            row.style.height = rowHeight + "px";
+
+
+            /*
+               Calcoliamo la larghezza esatta
+               di ogni fotografia.
+            */
+
+            rowImages.forEach(function (img, index) {
+
+                const imageWidth =
+                    ratios[index] * rowHeight;
+
+                img.style.height = rowHeight + "px";
+                img.style.width = imageWidth + "px";
+
+            });
+
+        });
+
+    }
+
+
+    /*
+       Aspettiamo che le fotografie abbiano
+       caricato le loro dimensioni originali.
+    */
+
+    let loadedImages = 0;
+
+    images.forEach(function (img) {
+
+        if (img.complete && img.naturalWidth) {
+
+            loadedImages++;
+
+        } else {
+
+            img.addEventListener(
+                "load",
+                function () {
+
+                    loadedImages++;
+
+                    if (loadedImages === images.length) {
+                        layoutGallery();
+                    }
+
+                },
+                { once:true }
+            );
+
+        }
+
+    });
+
+
+    /*
+       Se tutte erano già caricate.
+    */
+
+    if (loadedImages === images.length) {
+        layoutGallery();
+    }
+
+
+    /*
+       Ricalcoliamo tutto quando cambia
+       la larghezza della finestra.
+    */
+
+    let resizeTimer;
+
+    window.addEventListener("resize", function () {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+
+            layoutGallery();
+
+        }, 100);
+
+    });
+
+});

@@ -306,245 +306,73 @@ body{
 
 
 /* ==========================================================
-   FOTO PRINCIPALE FATTORE UMANO
+   FOTO PRINCIPALE
    ========================================================== */
 
 .fattore-gallery .gallery-featured{
     width:100%;
     height:auto;
-
     display:block;
 
-    margin-bottom:8px;
+    margin:0;
 }
 
 
 /* ==========================================================
-   GRIGLIA FATTORE UMANO
-   ==========================================================
-
-   La griglia mantiene le 12 colonne originali.
-
-   DIFFERENZA RISPETTO ALLA VERSIONE PRECEDENTE:
-
-   Prima:
-       grid-auto-rows:100px;
-
-   Ora:
-       grid-auto-rows:auto;
-
-   In questo modo non imponiamo un'altezza artificiale
-   alle immagini.
+   GALLERIA JUSTIFIED
    ========================================================== */
 
 .fattore-grid{
-    display:grid;
-
     width:100%;
+    display:flex;
+    flex-direction:column;
 
-    grid-template-columns:
-        repeat(12,minmax(0,1fr));
+    margin:0;
+    padding:0;
 
-    grid-auto-rows:auto;
-
-    gap:8px;
-
-    align-items:start;
+    gap:0;
 }
 
 
 /* ==========================================================
-   FOTO FATTORE UMANO
-   ==========================================================
-
-   PRIMA:
-
-       width:100%;
-       height:100%;
-       object-fit:cover;
-
-   Questo provocava il crop delle fotografie.
-
-   ORA:
-
-       width:100%;
-       height:auto;
-       object-fit:contain;
-
-   Le fotografie mantengono quindi il loro rapporto originale.
+   RIGHE
    ========================================================== */
 
-.fattore-grid img{
+.fattore-row{
     width:100%;
-    height:auto;
+
+    display:flex;
+    flex-direction:row;
+
+    margin:0;
+    padding:0;
+
+    gap:0;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   FOTO
+   ========================================================== */
+
+.fattore-row img{
+    display:block;
+
+    flex:none;
+
+    width:auto;
+    height:100%;
+
+    max-width:none;
+
+    margin:0;
+    padding:0;
 
     object-fit:contain;
 
-    display:block;
-
     cursor:pointer;
-
-    /*
-       Il rapporto viene mantenuto automaticamente
-       dal file originale.
-    */
-    aspect-ratio:auto;
-}
-
-
-/* ==========================================================
-   COMPOSIZIONE FATTORE UMANO
-   ========================================================== */
-
-/*
-   Manteniamo la composizione originale a 12 colonne.
-*/
-
-
-.g1{
-    grid-column:span 4;
-    grid-row:span 2;
-
-    aspect-ratio:401 / 601;
-}
-
-.g2{
-    grid-column:span 4;
-    grid-row:span 2;
-
-    aspect-ratio:800 / 533;
-}
-
-.g3{
-    grid-column:span 4;
-    grid-row:span 2;
-
-    aspect-ratio:800 / 534;
-}
-
-
-.g4{
-    grid-column:span 6;
-    grid-row:span 3;
-
-    aspect-ratio:667 / 1000;
-}
-
-.g5{
-    grid-column:span 3;
-    grid-row:span 3;
-
-    aspect-ratio:668 / 1000;
-}
-
-.g6{
-    grid-column:span 3;
-    grid-row:span 3;
-
-    aspect-ratio:800 / 534;
-}
-
-
-.g7{
-    grid-column:span 4;
-    grid-row:span 3;
-
-    aspect-ratio:800 / 534;
-}
-
-.g8{
-    grid-column:span 4;
-    grid-row:span 3;
-
-    aspect-ratio:521 / 521;
-}
-
-.g9{
-    grid-column:span 4;
-    grid-row:span 3;
-
-    aspect-ratio:800 / 534;
-}
-
-
-.g10{
-    grid-column:span 3;
-    grid-row:span 3;
-
-    aspect-ratio:800 / 534;
-}
-
-.g11{
-    grid-column:span 6;
-    grid-row:span 3;
-
-    aspect-ratio:534 / 800;
-}
-
-.g12{
-    grid-column:span 3;
-    grid-row:span 3;
-
-    aspect-ratio:800 / 534;
-}
-
-
-.g13{
-    grid-column:span 4;
-    grid-row:span 2;
-
-    aspect-ratio:800 / 534;
-}
-
-.g14{
-    grid-column:span 4;
-    grid-row:span 2;
-
-    aspect-ratio:800 / 534;
-}
-
-.g15{
-    grid-column:span 4;
-    grid-row:span 3;
-
-    aspect-ratio:533 / 800;
-}
-
-
-.g16{
-    grid-column:span 5;
-    grid-row:span 3;
-
-    aspect-ratio:365 / 511;
-}
-
-.g17{
-    grid-column:span 3;
-    grid-row:span 3;
-
-    aspect-ratio:800 / 534;
-}
-
-.g18{
-    grid-column:span 4;
-    grid-row:span 3;
-
-    aspect-ratio:800 / 534;
-}
-
-
-.g19{
-    grid-column:span 6;
-    grid-row:span 3;
-
-    aspect-ratio:668 / 1000;
-}
-
-.g20{
-    grid-column:span 6;
-    grid-row:span 3;
-
-    aspect-ratio:415 / 623;
 }
 
 
