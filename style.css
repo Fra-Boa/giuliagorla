@@ -1135,31 +1135,13 @@ body{
    ========================================================== */
 
 .vertical-carousel-track img{
-
-    /*
-       Il carousel occupa esattamente la stessa
-       larghezza della galleria sopra.
-
-       3 foto + 2 spazi da 12px
-    */
-
-    width:calc(
-        (var(--carousel-width) - 24px) / 3
-    );
-
-    height:360px;
-
-    flex:0 0 calc(
-        (var(--carousel-width) - 24px) / 3
-    );
-
-    object-fit:cover;
-
+    height:300px;
+    width:auto;
+    flex:0 0 auto;
+    object-fit:contain;
     display:block;
-
     cursor:pointer;
 }
-
 
 /* ==========================================================
    FRECCE

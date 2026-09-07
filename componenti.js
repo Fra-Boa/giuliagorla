@@ -652,18 +652,16 @@ document.addEventListener("DOMContentLoaded", function () {
        ====================================================== */
 
     function next(){
-
         const maxIndex =
             Math.max(0, images.length - 3);
 
         if(index < maxIndex){
-
             index++;
-
-            updateCarousel();
-
+        }else{
+            index = 0;
         }
 
+        updateCarousel();
     }
 
 
