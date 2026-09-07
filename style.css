@@ -1119,7 +1119,7 @@ body{
 
 .vertical-carousel-track{
     display:flex;
-    gap:6px;
+    gap:2px;
     width:max-content;
     transform:translateX(0);
     transition:transform .45s ease;
