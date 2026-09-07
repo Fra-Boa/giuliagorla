@@ -1000,69 +1000,82 @@ body{
 
 
     /* ======================================================
-       FATTORE UMANO MOBILE
-       ======================================================
+   FATTORE UMANO — MOBILE
+   ====================================================== */
 
-       Su mobile abbandoniamo la composizione a 12 colonne.
-
-       Ogni fotografia occupa tutta la larghezza disponibile
-       e mantiene esattamente il proprio rapporto originale.
-       ====================================================== */
-
-    .fattore-grid{
-        display:grid;
-
+    .fattore-gallery{
         width:100%;
-
-        grid-template-columns:1fr;
-
-        grid-auto-rows:auto;
-
-        gap:8px;
-
-        align-items:start;
+        margin-top:4rem;
     }
 
 
-    .fattore-grid img{
+    /* ======================================================
+    FOTO PRINCIPALE
+    ====================================================== */
+
+    .fattore-gallery .gallery-featured{
         width:100%;
-
         height:auto;
-
-        object-fit:contain;
 
         display:block;
 
-        aspect-ratio:auto;
+        margin-bottom:16px;
     }
 
 
-    /*
-       Disattiviamo gli span della composizione desktop.
-    */
+    /* ======================================================
+    GALLERIA
+    ====================================================== */
 
-    .g1,
-    .g2,
-    .g3,
-    .g4,
-    .g5,
-    .g6,
-    .g7,
-    .g8,
-    .g9,
-    .g10,
-    .g11,
-    .g12,
-    .g13,
-    .g14,
-    .g15,
-    .g16,
-    .g17,
-    .g18,
-    .g19,
-    .g20{
-        grid-column:1;
-        grid-row:auto;
+    .fattore-grid{
+        width:100%;
+
+        display:flex;
+        flex-direction:column;
+
+        gap:8px;
+
+        margin:0;
+        padding:0;
+    }
+
+
+    /* ======================================================
+    RIGHE MOBILE
+    ====================================================== */
+
+    .fattore-row{
+        width:100%;
+
+        display:flex;
+        flex-direction:column;
+
+        gap:8px;
+
+        height:auto !important;
+
+        overflow:visible;
+    }
+
+
+    /* ======================================================
+    FOTO MOBILE
+    ====================================================== */
+
+    .fattore-row img{
+        width:100% !important;
+        height:auto !important;
+
+        max-width:100%;
+
+        display:block;
+
+        flex:none;
+
+        margin:0;
+        padding:0;
+
+        object-fit:contain;
     }
 
 }
