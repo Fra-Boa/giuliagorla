@@ -1119,16 +1119,11 @@ body{
 
 .vertical-carousel-track{
     display:flex;
-
-    gap:12px;
-
+    gap:6px;
     width:max-content;
-
     transform:translateX(0);
-
     transition:transform .45s ease;
 }
-
 
 /* ==========================================================
    FOTO
