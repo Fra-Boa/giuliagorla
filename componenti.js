@@ -549,49 +549,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const carousel = document.querySelector(".vertical-carousel");
+    const carousel =
+        document.querySelector(".vertical-carousel");
 
     if (!carousel) return;
 
-    const viewport = carousel.querySelector(
-        ".vertical-carousel-viewport"
-    );
 
-    const track = carousel.querySelector(
-        ".vertical-carousel-track"
-    );
+    const viewport =
+        carousel.querySelector(
+            ".vertical-carousel-viewport"
+        );
 
-    const images = Array.from(
-        track.querySelectorAll("img")
-    );
+    const track =
+        carousel.querySelector(
+            ".vertical-carousel-track"
+        );
 
-    const prevButton = carousel.querySelector(
-        ".vertical-carousel-btn.prev"
-    );
+    const images =
+        Array.from(
+            track.querySelectorAll("img")
+        );
 
-    const nextButton = carousel.querySelector(
-        ".vertical-carousel-btn.next"
-    );
+    const prevButton =
+        carousel.querySelector(
+            ".vertical-carousel-btn.prev"
+        );
+
+    const nextButton =
+        carousel.querySelector(
+            ".vertical-carousel-btn.next"
+        );
 
 
     let index = 0;
 
 
     /* ======================================================
-       CALCOLA QUANTO SPOSTARE
+       CALCOLA DIMENSIONI
+       ====================================================== */
+
+    function updateWidth(){
+
+        const carouselWidth =
+            viewport.getBoundingClientRect().width;
+
+        carousel.style.setProperty(
+            "--carousel-width",
+            carouselWidth + "px"
+        );
+
+    }
+
+
+    /* ======================================================
+       CALCOLA SPOSTAMENTO
        ====================================================== */
 
     function getStep(){
 
-        const image = images[0];
+        if (!images.length) return 0;
 
-        if (!image) return 0;
+        const imageWidth =
+            images[0].getBoundingClientRect().width;
 
-        const imageWidth = image.getBoundingClientRect().width;
+        const trackStyle =
+            window.getComputedStyle(track);
 
-        const trackStyle = window.getComputedStyle(track);
+        const gap =
+            parseFloat(trackStyle.columnGap) || 0;
 
-        const gap = parseFloat(trackStyle.columnGap) || 0;
+        /*
+           Ogni click sposta:
+           
+           larghezza foto
+           +
+           spazio tra le foto
+        */
 
         return imageWidth + gap;
 
@@ -599,10 +632,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ======================================================
-       AGGIORNA CAROSELLO
+       AGGIORNA CAROUSEL
        ====================================================== */
 
     function updateCarousel(){
+
+        updateWidth();
 
         const step = getStep();
 
@@ -613,20 +648,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ======================================================
-       SUCCESSIVA
+       NEXT
        ====================================================== */
 
     function next(){
 
-        /*
-           Ci sono sempre 3 foto visibili.
-
-           Quindi l'ultima posizione possibile
-           è quella che lascia le ultime 3 foto
-           dentro il viewport.
-        */
-
-        const maxIndex = images.length - 3;
+        const maxIndex =
+            Math.max(0, images.length - 3);
 
         if(index < maxIndex){
 
@@ -640,7 +668,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ======================================================
-       PRECEDENTE
+       PREV
        ====================================================== */
 
     function prev(){
@@ -660,30 +688,42 @@ document.addEventListener("DOMContentLoaded", function () {
        BOTTONI
        ====================================================== */
 
-    nextButton.addEventListener(
-        "click",
-        next
-    );
+    if(nextButton){
 
-    prevButton.addEventListener(
-        "click",
-        prev
-    );
+        nextButton.addEventListener(
+            "click",
+            next
+        );
+
+    }
+
+    if(prevButton){
+
+        prevButton.addEventListener(
+            "click",
+            prev
+        );
+
+    }
 
 
     /* ======================================================
-       SWIPE TOUCH
+       SWIPE MOBILE
        ====================================================== */
 
     let startX = 0;
     let startY = 0;
 
+
     viewport.addEventListener(
         "touchstart",
         function(event){
 
-            startX = event.touches[0].clientX;
-            startY = event.touches[0].clientY;
+            startX =
+                event.touches[0].clientX;
+
+            startY =
+                event.touches[0].clientY;
 
         },
         {passive:true}
@@ -694,21 +734,29 @@ document.addEventListener("DOMContentLoaded", function () {
         "touchend",
         function(event){
 
-            const endX = event.changedTouches[0].clientX;
-            const endY = event.changedTouches[0].clientY;
+            const endX =
+                event.changedTouches[0].clientX;
 
-            const differenceX = endX - startX;
-            const differenceY = endY - startY;
+            const endY =
+                event.changedTouches[0].clientY;
+
+
+            const differenceX =
+                endX - startX;
+
+            const differenceY =
+                endY - startY;
 
 
             /*
-               Evitiamo di interpretare
-               uno scroll verticale come swipe.
+               Consideriamo swipe solo se
+               il movimento orizzontale prevale.
             */
 
             if(
                 Math.abs(differenceX) > 40 &&
-                Math.abs(differenceX) > Math.abs(differenceY)
+                Math.abs(differenceX) >
+                Math.abs(differenceY)
             ){
 
                 if(differenceX < 0){
@@ -729,63 +777,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ======================================================
-       MOUSE DRAG
+       RESIZE
        ====================================================== */
 
-    let mouseStartX = null;
+    let resizeTimer;
 
-    viewport.addEventListener(
-        "mousedown",
-        function(event){
+    window.addEventListener(
+        "resize",
+        function(){
 
-            mouseStartX = event.clientX;
+            clearTimeout(resizeTimer);
 
-        }
-    );
+            resizeTimer = setTimeout(
+                function(){
 
-    viewport.addEventListener(
-        "mouseup",
-        function(event){
+                    updateCarousel();
 
-            if(mouseStartX === null) return;
-
-            const difference =
-                event.clientX - mouseStartX;
-
-            if(Math.abs(difference) > 40){
-
-                if(difference < 0){
-
-                    next();
-
-                }else{
-
-                    prev();
-
-                }
-
-            }
-
-            mouseStartX = null;
+                },
+                100
+            );
 
         }
     );
 
 
     /* ======================================================
-       RESIZE
+       AVVIO
        ====================================================== */
 
-    window.addEventListener(
-        "resize",
+    /*
+       Aspettiamo un attimo che il layout
+       sia stato calcolato dal browser.
+    */
+
+    setTimeout(
         function(){
 
             updateCarousel();
 
-        }
+        },
+        50
     );
-
-
-    updateCarousel();
 
 });
