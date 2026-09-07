@@ -542,9 +542,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-
 /* ==========================================================
-   CAROSELLO 3 FOTO VERTICALI
+   CAROSELLO FOTO VERTICALI
    ========================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -553,7 +552,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(".vertical-carousel");
 
     if (!carousel) return;
-
 
     const viewport =
         carousel.querySelector(
@@ -580,37 +578,17 @@ document.addEventListener("DOMContentLoaded", function () {
             ".vertical-carousel-btn.next"
         );
 
-
     let index = 0;
 
 
     /* ======================================================
-       CALCOLA DIMENSIONI
+       DIMENSIONI
        ====================================================== */
 
-    function updateWidth(){
+    function updateDimensions(){
 
         const carouselWidth =
             viewport.getBoundingClientRect().width;
-
-        carousel.style.setProperty(
-            "--carousel-width",
-            carouselWidth + "px"
-        );
-
-    }
-
-
-    /* ======================================================
-       CALCOLA SPOSTAMENTO
-       ====================================================== */
-
-    function getStep(){
-
-        if (!images.length) return 0;
-
-        const imageWidth =
-            images[0].getBoundingClientRect().width;
 
         const trackStyle =
             window.getComputedStyle(track);
@@ -618,16 +596,44 @@ document.addEventListener("DOMContentLoaded", function () {
         const gap =
             parseFloat(trackStyle.columnGap) || 0;
 
+
         /*
-           Ogni click sposta:
-           
-           larghezza foto
-           +
-           spazio tra le foto
+           VOGLIAMO 4 FOTO PRECISE
+           visibili contemporaneamente.
         */
 
-        return imageWidth + gap;
+        const visibleImages = 4;
 
+        const totalGaps =
+            gap * (visibleImages - 1);
+
+
+        /*
+           Larghezza disponibile per ogni foto.
+        */
+
+        const imageWidth =
+            (carouselWidth - totalGaps) /
+            visibleImages;
+
+
+        /*
+           Manteniamo la proporzione originale
+           delle fotografie.
+        */
+
+        images.forEach(function(img){
+
+            img.style.width =
+                imageWidth + "px";
+
+            img.style.height =
+                "300px";
+
+        });
+
+
+        return imageWidth + gap;
     }
 
 
@@ -637,12 +643,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateCarousel(){
 
-        updateWidth();
-
-        const step = getStep();
+        const step =
+            updateDimensions();
 
         track.style.transform =
-            `translateX(-${index * step}px)`;
+            `translate3d(-${index * step}px, 0, 0)`;
 
     }
 
@@ -652,16 +657,28 @@ document.addEventListener("DOMContentLoaded", function () {
        ====================================================== */
 
     function next(){
+
         const maxIndex =
-            Math.max(0, images.length - 3);
+            Math.max(0, images.length - 4);
+
 
         if(index < maxIndex){
+
             index++;
+
         }else{
+
+            /*
+               Arrivati alla fine,
+               torniamo all'inizio.
+            */
+
             index = 0;
+
         }
 
         updateCarousel();
+
     }
 
 
@@ -675,9 +692,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
             index--;
 
-            updateCarousel();
+        }else{
+
+            /*
+               Se siamo all'inizio,
+               torniamo all'ultima posizione.
+            */
+
+            index =
+                Math.max(0, images.length - 4);
 
         }
+
+        updateCarousel();
 
     }
 
@@ -724,7 +751,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.touches[0].clientY;
 
         },
-        {passive:true}
+        { passive:true }
     );
 
 
@@ -746,11 +773,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 endY - startY;
 
 
-            /*
-               Consideriamo swipe solo se
-               il movimento orizzontale prevale.
-            */
-
             if(
                 Math.abs(differenceX) > 40 &&
                 Math.abs(differenceX) >
@@ -770,7 +792,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
         },
-        {passive:true}
+        { passive:true }
     );
 
 
@@ -802,11 +824,6 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ======================================================
        AVVIO
        ====================================================== */
-
-    /*
-       Aspettiamo un attimo che il layout
-       sia stato calcolato dal browser.
-    */
 
     setTimeout(
         function(){
