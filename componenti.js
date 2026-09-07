@@ -587,54 +587,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateDimensions(){
 
-        const carouselWidth =
-            viewport.getBoundingClientRect().width;
+    const carouselWidth =
+        viewport.getBoundingClientRect().width;
 
-        const trackStyle =
-            window.getComputedStyle(track);
+    const trackStyle =
+        window.getComputedStyle(track);
 
-        const gap =
-            parseFloat(trackStyle.columnGap) || 0;
-
-
-        /*
-           VOGLIAMO 4 FOTO PRECISE
-           visibili contemporaneamente.
-        */
-
-        const visibleImages = 4;
-
-        const totalGaps =
-            gap * (visibleImages - 1);
+    const gap =
+        parseFloat(trackStyle.columnGap) || 0;
 
 
-        /*
-           Larghezza disponibile per ogni foto.
-        */
+    /*
+       Quattro immagini precise.
+    */
 
-        const imageWidth =
-            (carouselWidth - totalGaps) /
-            visibleImages;
+    const visibleImages = 4;
 
 
-        /*
-           Manteniamo la proporzione originale
-           delle fotografie.
-        */
+    /*
+       Spazio occupato dai tre gap.
+    */
 
-        images.forEach(function(img){
-
-            img.style.width =
-                imageWidth + "px";
-
-            img.style.height =
-                "300px";
-
-        });
+    const totalGaps =
+        gap * (visibleImages - 1);
 
 
-        return imageWidth + gap;
-    }
+    /*
+       Larghezza esatta di ogni immagine.
+    */
+
+    const imageWidth =
+        (carouselWidth - totalGaps) /
+        visibleImages;
+
+
+    /*
+       Impostiamo SOLO la larghezza.
+
+       L'altezza viene calcolata automaticamente
+       dal browser mantenendo il rapporto originale
+       della fotografia.
+    */
+
+    images.forEach(function(img){
+
+        img.style.width =
+            imageWidth + "px";
+
+        img.style.height =
+            "auto";
+
+    });
+
+
+    /*
+       Un movimento corrisponde esattamente
+       a una foto + uno spazio.
+    */
+
+    return imageWidth + gap;
+
+}
 
 
     /* ======================================================

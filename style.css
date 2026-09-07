@@ -1086,20 +1086,17 @@ body{
 /* ==========================================================
    CAROSELLO 3 FOTO VERTICALI
    ========================================================== */
+/* ==========================================================
+   CAROSELLO FOTO VERTICALI
+   ========================================================== */
 
 .vertical-carousel{
+
     position:relative;
-
     width:100%;
-
-    /*
-       Spazio sopra il carousel.
-       Puoi portarlo a 3rem se lo vuoi più vicino
-       alla galleria precedente.
-    */
     margin-top:3rem;
-
     overflow:hidden;
+
 }
 
 
@@ -1108,8 +1105,10 @@ body{
    ========================================================== */
 
 .vertical-carousel-viewport{
+
     width:100%;
     overflow:hidden;
+
 }
 
 
@@ -1118,25 +1117,38 @@ body{
    ========================================================== */
 
 .vertical-carousel-track{
+
     display:flex;
-    gap:2px;
+    gap:6px;
     width:max-content;
+
     transform:translateX(0);
-    transition:transform .45s ease;
+
+    transition:
+        transform .45s ease;
+
 }
+
 
 /* ==========================================================
    FOTO
    ========================================================== */
 
 .vertical-carousel-track img{
-    height:300px;
+
     width:auto;
+    height:auto;
+
     flex:0 0 auto;
-    object-fit:contain;
+
     display:block;
+
+    object-fit:contain;
+
     cursor:pointer;
+
 }
+
 
 /* ==========================================================
    FRECCE
@@ -1147,7 +1159,6 @@ body{
     position:absolute;
 
     top:50%;
-
     transform:translateY(-50%);
 
     z-index:20;
@@ -1162,7 +1173,6 @@ body{
     color:#111;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -1175,30 +1185,36 @@ body{
     transition:
         opacity .25s ease,
         background .25s ease;
+
 }
 
-
-/*
-   Le frecce compaiono quando passi
-   sopra il carousel.
-*/
 
 .vertical-carousel:hover .vertical-carousel-btn{
+
     opacity:.8;
+
 }
 
+
 .vertical-carousel-btn:hover{
+
     opacity:1;
     background:#fff;
+
 }
 
 
 .vertical-carousel-btn.prev{
+
     left:8px;
+
 }
 
+
 .vertical-carousel-btn.next{
+
     right:8px;
+
 }
 
 
@@ -1216,26 +1232,21 @@ body{
 
     .vertical-carousel-track{
 
-        gap:8px;
+        gap:6px;
 
     }
 
     .vertical-carousel-track img{
 
         /*
-           Su mobile mostriamo comunque 3 foto,
-           ma più piccole.
+           La larghezza viene calcolata
+           automaticamente dal JavaScript.
+
+           Non impostiamo width o height qui,
+           così manteniamo le proporzioni originali.
         */
 
-        width:calc(
-            (var(--carousel-width) - 16px) / 3
-        );
-
-        flex:0 0 calc(
-            (var(--carousel-width) - 16px) / 3
-        );
-
-        height:220px;
+        flex:0 0 auto;
 
     }
 
@@ -1251,4 +1262,3 @@ body{
     }
 
 }
-
