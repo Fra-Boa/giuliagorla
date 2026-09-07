@@ -104,7 +104,7 @@ const prevButton = document.getElementById("lightbox-prev");
 const nextButton = document.getElementById("lightbox-next");
 
 const galleryImages = document.querySelectorAll(
-    ".gallery img, .gallery-featured"
+    ".gallery img, .gallery-featured, .fattore-gallery"
 );
 
 let currentImage = 0;
