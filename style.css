@@ -224,45 +224,42 @@ body{
 
 .project-title{
     margin-bottom:2rem;
-
+    font-family:Arial, Helvetica, sans-serif;
     font-size:1.7rem;
     font-weight:400;
     line-height:1.05;
-
     text-transform:uppercase;
-    letter-spacing:-0.01em;
+    letter-spacing:-0.02em;
 }
 
 .project-subtitle{
     margin-bottom:2rem;
-
+    font-family:Arial, Helvetica, sans-serif;
     font-size:.85rem;
-    font-weight:300;
-
+    font-weight:400;
     color:#9a9a9a;
-
     text-transform:uppercase;
     letter-spacing:.04em;
 }
 
 .project-text p{
     margin-bottom:1.3rem;
-
     text-align:justify;
-
+    font-family:Arial, Helvetica, sans-serif;
     font-size:.9rem;
-    line-height:1.1;
-    font-weight:300;
-
+    line-height:1.4;
+    font-weight:400;
+    letter-spacing:0;
     color:#939292;
 }
 
 .note{
     margin-top:1rem;
-
+    font-family:Arial, Helvetica, sans-serif;
     font-size:.8rem;
     font-style:italic;
-
+    font-weight:400;
+    letter-spacing:0;
     color:#666;
 }
 
@@ -699,11 +696,6 @@ body{
         margin:1rem 0;
     }
 
-    .menu a{
-        font-size:1.8rem;
-        line-height:1.1;
-    }
-
     .secondary-menu{
         margin-top:4rem;
         padding-top:2rem;
@@ -892,9 +884,12 @@ body{
     }
 
     .menu a{
-        font-size:1.5rem;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size:1.3rem;
+        font-weight:400;
+        line-height:1.2;
+        letter-spacing:1px;
     }
-
 
     /* ======================================================
        PAGINE SECONDARIE MOBILE
