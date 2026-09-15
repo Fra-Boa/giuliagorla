@@ -27,17 +27,17 @@ body{
 
 .about .project-text p {
     margin-bottom: 1.3rem;
-    text-align: justify;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: .9rem;
-    line-height: 1.4;
-    font-weight: 400;
-    letter-spacing: 0;
-    color: #939292;
+    text-align:justify;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:.9rem;
+    line-height:1.4;
+    font-weight:400;
+    letter-spacing:0;
+    color:#939292;
 }
 
 .about .project-text h3 {
-    margin-top: 1.6rem;
+    margin-top: 1.4rem;
     margin-bottom: 1.3rem;
 
     font-family: Arial, Helvetica, sans-serif;
