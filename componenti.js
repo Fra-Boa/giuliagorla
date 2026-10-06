@@ -848,3 +848,120 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 });
+
+
+
+
+/* ==========================================================
+   MENU A SCOMPARSA
+   ========================================================== */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const sections = document.querySelectorAll(".menu-section");
+
+    sections.forEach(section => {
+
+        const button = section.querySelector(".menu-toggle");
+
+        if(!button) return;
+
+        button.addEventListener("click", function(){
+
+            const isOpen = section.classList.contains("open");
+
+            /*
+             * Chiude tutte le altre sezioni
+             */
+            sections.forEach(otherSection => {
+
+                otherSection.classList.remove("open");
+
+                const otherButton =
+                    otherSection.querySelector(".menu-toggle");
+
+                if(otherButton){
+                    otherButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+                }
+
+            });
+
+
+            /*
+             * Se quella cliccata era chiusa,
+             * la apre
+             */
+            if(!isOpen){
+
+                section.classList.add("open");
+
+                button.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+
+            }
+
+        });
+
+    });
+
+
+    /* ======================================================
+       PAGINA ATTIVA
+       ====================================================== */
+
+    const currentPage =
+        window.location.pathname.split("/").pop();
+
+
+    const links =
+        document.querySelectorAll(".submenu a");
+
+
+    links.forEach(link => {
+
+        const linkPage =
+            link.getAttribute("href");
+
+        if(linkPage === currentPage){
+
+            /*
+             * Evidenzia il link corrente
+             */
+            link.classList.add("active");
+
+
+            /*
+             * Apre automaticamente
+             * la sezione corrispondente
+             */
+            const section =
+                link.closest(".menu-section");
+
+            if(section){
+
+                section.classList.add("open");
+
+                const button =
+                    section.querySelector(".menu-toggle");
+
+                if(button){
+
+                    button.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                }
+
+            }
+
+        }
+
+    });
+
+});
