@@ -306,6 +306,27 @@ body{
     opacity:.45;
 }
 
+.secondary-menu{
+    margin-top:3rem;
+}
+
+.secondary-menu a{
+    display:block;
+    text-decoration:none;
+    color:#444;
+    margin-bottom:.4rem;
+}
+
+.secondary-menu a:hover{
+    opacity:.6;
+}
+
+.copyright{
+    margin-top:2rem;
+    font-size:.9rem;
+    color:#777;
+}
+
 /* ==========================================================
    CONTENT
    ========================================================== */
