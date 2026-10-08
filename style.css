@@ -196,7 +196,7 @@ body{
     line-height:1;
 
     transition:
-        transform .50s ease,
+        transform .25s ease,
         opacity .2s ease;
 }
 
@@ -204,7 +204,7 @@ body{
 /* quando il menu è aperto */
 
 .menu-section.open .menu-arrow{
-    transform:rotate(45deg);
+    transform:rotate(90deg);
 }
 
 
