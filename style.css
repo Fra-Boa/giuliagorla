@@ -196,7 +196,7 @@ body{
     line-height:1;
 
     transition:
-        transform .25s ease,
+        transform .50s ease,
         opacity .2s ease;
 }
 
