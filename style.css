@@ -192,8 +192,10 @@ body{
 .menu-arrow{
     display:inline-block;
 
-    font-size:.9rem;
+    font-size:.5rem;
     line-height:1;
+
+    color:#757373;
 
     transition:
         transform .25s ease,
