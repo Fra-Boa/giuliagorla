@@ -195,8 +195,6 @@ body{
     font-size:.5rem;
     line-height:1;
 
-    color:#757373;
-
     transition:
         transform .25s ease,
         opacity .2s ease;
