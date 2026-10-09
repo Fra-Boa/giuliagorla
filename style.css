@@ -335,10 +335,12 @@ body{
     min-height:100vh;
 }
 
-.hero-image{
-    width:130%;
-    height:auto;
-    display:block;
+.hero-image {
+    width: 130%;
+    height: auto;
+    display: block;
+    transform: scaleX(1.08);
+    transform-origin: left center;
 }
 
 
