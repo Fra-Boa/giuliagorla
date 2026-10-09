@@ -406,7 +406,27 @@ body{
     letter-spacing:-0.02em;
 }
 
+
 .project-subtitle{
+    margin-bottom:2rem;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:.85rem;
+    font-weight:400;
+    color:#9a9a9a;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+}
+
+.project-title-CRI{
+    margin-bottom:2rem;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:1.7rem;
+    font-weight:400;
+    line-height:1.05;
+    letter-spacing:-0.02em;
+}
+
+.project-subtitle-CRI{
     margin-bottom:2rem;
     font-family:Arial, Helvetica, sans-serif;
     font-size:.85rem;
