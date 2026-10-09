@@ -339,7 +339,7 @@ body{
     width: 130%;
     height: auto;
     display: block;
-    transform: scaleX(1.08);
+    transform: scaleX(1.20);
     transform-origin: left center;
 }
 
