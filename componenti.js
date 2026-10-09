@@ -851,59 +851,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
 /* ==========================================================
-   MENU A SCOMPARSA
+   MENU A SCOMPARSA — SUPPORTO MENU ANNIDATI
    ========================================================== */
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
     const sections = document.querySelectorAll(".menu-section");
 
-    sections.forEach(section => {
+    /* ======================================================
+       APERTURA E CHIUSURA DEI SOTTOMENU
+       ====================================================== */
 
-        const button = section.querySelector(".menu-toggle");
+    sections.forEach(function (section) {
 
-        if(!button) return;
+        // Cerca esclusivamente il pulsante figlio diretto
+        const button = Array.from(section.children).find(
+            child => child.classList.contains("menu-toggle")
+        );
 
-        button.addEventListener("click", function(){
+        if (!button) return;
+
+        button.addEventListener("click", function () {
 
             const isOpen = section.classList.contains("open");
 
-            /*
-             * Chiude tutte le altre sezioni
-             */
-            sections.forEach(otherSection => {
+            // Apri o chiudi soltanto questa sezione.
+            // Le sezioni genitrici non vengono modificate.
+            section.classList.toggle("open", !isOpen);
 
-                otherSection.classList.remove("open");
-
-                const otherButton =
-                    otherSection.querySelector(".menu-toggle");
-
-                if(otherButton){
-                    otherButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-                }
-
-            });
-
-
-            /*
-             * Se quella cliccata era chiusa,
-             * la apre
-             */
-            if(!isOpen){
-
-                section.classList.add("open");
-
-                button.setAttribute(
-                    "aria-expanded",
-                    "true"
-                );
-
-            }
+            button.setAttribute(
+                "aria-expanded",
+                String(!isOpen)
+            );
 
         });
 
@@ -911,55 +891,45 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     /* ======================================================
-       PAGINA ATTIVA
+       EVIDENZIAZIONE DELLA PAGINA ATTIVA
        ====================================================== */
 
     const currentPage =
-        window.location.pathname.split("/").pop();
+        window.location.pathname.split("/").pop() || "index.html";
 
+    const links = document.querySelectorAll(".menu a[href]");
 
-    const links =
-        document.querySelectorAll(".submenu a");
+    links.forEach(function (link) {
 
+        const linkPage = link.getAttribute("href");
 
-    links.forEach(link => {
+        if (linkPage !== currentPage) return;
 
-        const linkPage =
-            link.getAttribute("href");
+        link.classList.add("active");
 
-        if(linkPage === currentPage){
+        // Apri la sezione che contiene il link
+        // e tutte le eventuali sezioni genitrici.
+        let parentSection = link.closest(".menu-section");
 
-            /*
-             * Evidenzia il link corrente
-             */
-            link.classList.add("active");
+        while (parentSection) {
 
+            parentSection.classList.add("open");
 
-            /*
-             * Apre automaticamente
-             * la sezione corrispondente
-             */
-            const section =
-                link.closest(".menu-section");
+            const parentButton = Array.from(
+                parentSection.children
+            ).find(
+                child => child.classList.contains("menu-toggle")
+            );
 
-            if(section){
-
-                section.classList.add("open");
-
-                const button =
-                    section.querySelector(".menu-toggle");
-
-                if(button){
-
-                    button.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-
-                }
-
+            if (parentButton) {
+                parentButton.setAttribute("aria-expanded", "true");
             }
 
+            const parentList = parentSection.parentElement;
+
+            parentSection = parentList
+                ? parentList.closest(".menu-section")
+                : null;
         }
 
     });

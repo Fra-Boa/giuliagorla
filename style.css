@@ -203,7 +203,7 @@ body{
 
 /* quando il menu è aperto */
 
-.menu-section.open .menu-arrow{
+.menu-section.open > .menu-toggle .menu-arrow{
     transform:rotate(90deg);
 }
 
@@ -232,12 +232,10 @@ body{
 
 /* sottomenu aperto */
 
-.menu-section.open .submenu{
-    max-height:300px;
-
+.menu-section.open > .submenu{
+    max-height:1000px;
     padding-top:.55rem;
     padding-bottom:.25rem;
-
     opacity:1;
 }
 
@@ -904,10 +902,10 @@ body{
         padding-left:1.2rem;
     }
 
-    .menu-section.open .submenu{
+    .menu-section.open > .submenu{
         padding-top:.7rem;
         padding-bottom:.3rem;
-    }
+    }   
 
     .submenu a{
         font-size:1rem;
