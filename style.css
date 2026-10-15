@@ -343,7 +343,7 @@ body{
     display: block;
     object-fit: cover;
     object-position: center;
-    margin-left: 0;
+    margin-left: -30px;
     transform: none;
 }
 
