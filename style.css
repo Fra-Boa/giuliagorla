@@ -329,17 +329,18 @@ body{
    CONTENT
    ========================================================== */
 
-.content{
-    margin-left:40vw;
-    width:60vw;
-    min-height:100vh;
+.content {
+    width: 100%;
+    margin-left: 0;
 }
 
 .hero-image {
-    width: 130%;
-    height: auto;
-    display: block;
-    margin-left: -150px;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    object-fit: cover;
+    margin-left: 0;
+    transform: none;
 }
 
 
@@ -1078,18 +1079,16 @@ body{
        CONTENT MOBILE
        ====================================================== */
 
-    .content{
-        width:100%;
-        margin-left:0;
+   .content {
+    width: 100%;
+    margin-left: 0;
     }
 
-    .hero-image{
-        width:100%;
-
-        height:100vh;
-        min-height:100vh;
-
-        object-fit:cover;
+    .hero-image {
+        width: 100%;
+        height: 100vh;
+        min-height: 100vh;
+        object-fit: cover;
     }
 
 
