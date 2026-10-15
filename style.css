@@ -329,17 +329,22 @@ body{
    CONTENT
    ========================================================== */
 
-.content{
-    margin-left:40vw;
-    width:60vw;
-    min-height:100vh;
+.content {
+    margin-left: 40vw;
+    width: 60vw;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 .hero-image {
-    width: 130%;
-    height: auto;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
     display: block;
-    margin-left: -150px;
+    object-fit: cover;
+    object-position: center;
+    margin-left: 0;
+    transform: none;
 }
 
 
