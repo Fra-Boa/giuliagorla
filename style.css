@@ -329,18 +329,17 @@ body{
    CONTENT
    ========================================================== */
 
-.content {
-    width: 100%;
-    margin-left: 0;
+.content{
+    margin-left:40vw;
+    width:60vw;
+    min-height:100vh;
 }
 
 .hero-image {
-    width: 100%;
-    height: 100vh;
-    min-height: 100vh;
-    object-fit: cover;
-    margin-left: 0;
-    transform: none;
+    width: 130%;
+    height: auto;
+    display: block;
+    margin-left: -150px;
 }
 
 
@@ -1079,7 +1078,7 @@ body{
        CONTENT MOBILE
        ====================================================== */
 
-   .content {
+  .content {
     width: 100%;
     margin-left: 0;
     }
@@ -1089,6 +1088,8 @@ body{
         height: 100vh;
         min-height: 100vh;
         object-fit: cover;
+        margin-left: 0;
+        transform: none;
     }
 
 
