@@ -12,26 +12,30 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
+
+
+
 <body>
 
-<header class="mobile-header">
-    <div class="mobile-brand">
-        <h1>
-            <a href="index.html">GIULIA GORLA</a>
-        </h1>
-        <p>photojournalist – documentary photographer</p>
-    </div>
 
-    <button class="hamburger" id="hamburger">
-        <i class="fa-solid fa-bars"></i>
-    </button>
-</header>
+    <header class="mobile-header">
+        <div class="mobile-brand">
+            <h1>
+                <a href="index.html">GIULIA GORLA</a>
+            </h1>
+            <p>photojournalist – documentary photographer</p>
+        </div>
 
-<div class="site">
+        <button class="hamburger" id="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+    <!-- NAVIGAZIONE -->
+    <div class="site">
 
-    <div class="left-col">
+   <div class="left-col">
 
-        <div class="brand">
+  <div class="brand">
             <h1>
                 <a href="index.html">GIULIA GORLA</a>
             </h1>
@@ -40,7 +44,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             </p>
         </div>
 
-        <aside class="sidebar" id="sidebar">
+       <aside class="sidebar" id="sidebar">
 
             <ul class="menu">
 
@@ -136,9 +140,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                         <li>
                             <a href="cartoline_d_archivio.html">CARTOLINE D'ARCHIVIO</a>
                         </li>
-                        <li>
-                            <a href="fluido_aereo.html">FLUIDO AEREO</a>
-                        </li>
                     </ul>
                 </li>
 
@@ -190,48 +191,58 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         </aside>
 
-    </div>
+</div>
 
-   <!-- CONTENUTO -->
+    <!-- CONTENUTO -->
     <main class="project">
     <div class="project-inner">
-
         <div class="project-intro">
 
             <span class="project-year">
-                2022
+                2024 → ongoing
             </span>
 
-            <h2 class="project-title-CRI">
-            </h2>
-            <h3 class="project-subtitle-CRI">
-            </h3>
+        </div>
 
-            <div class="project-text">
-
-                
-            </div>
-
-        <section class="gallery">
-
-            <img src="fluido_aereo/1.jpg" alt="">
-            <img src="fluido_aereo/2.jpg" alt="">
-            <img src="fluido_aereo/3.jpg" alt="">
-            <img src="fluido_aereo/4.jpg" alt="">
-            <img src="fluido_aereo/5.jpg" alt="">
-            <img src="fluido_aereo/6.jpg" alt="">
-            <img src="fluido_aereo/7.jpg" alt="">
-            <img src="fluido_aereo/8.jpg" alt="">
-            <img src="fluido_aereo/9.jpg" alt="">
-            <img src="fluido_aereo/10.jpg" alt="">
-            <img src="fluido_aereo/11.jpg" alt="">
-            <img src="fluido_aereo/12.jpg" alt="">
-            <img src="fluido_aereo/13.jpg" alt="">
-
+    <section class="fattore-gallery">
 
         </section>
+        <!-- CAROSELLO FOTO VERTICALI -->
 
-                       <!-- LIGHTBOX -->
+        <div class="vertical-carousel">
+
+            <button class="vertical-carousel-btn prev" aria-label="Foto precedente">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="vertical-carousel-viewport">
+
+
+                <div class="vertical-carousel-track">
+
+                    <img src="fattore_umano/carosello_1.jpg" alt="">
+                    <img src="fattore_umano/carosello_2.jpg" alt="">
+                    <img src="fattore_umano/carosello_3.jpg" alt="">
+                    <img src="fattore_umano/carosello_4.jpg" alt="">
+                    <img src="fattore_umano/carosello_5.jpg" alt="">
+                    <img src="fattore_umano/carosello_6.jpg" alt="">
+                    <img src="fattore_umano/carosello_7.jpg" alt="">
+                    <img src="fattore_umano/carosello_8.jpg" alt="">
+                    <img src="fattore_umano/carosello_9.jpg" alt="">
+
+                </div>
+
+            </div>
+
+            <button class="vertical-carousel-btn next" aria-label="Foto successiva">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </div>
+
+        <img class="gallery-featured" src="fattore_umano/fattoreumano1.jpg.jpeg" alt="">
+
+               <!-- LIGHTBOX -->
         <div class="lightbox" id="lightbox">
 
             <button class="lightbox-close" id="lightbox-close">
@@ -250,9 +261,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
 
-        </div>
+        </div>  
       </div>
-
+    </main>
 <script src="componenti.js"></script>
 </body>
-</html>
