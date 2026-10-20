@@ -585,7 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
        DIMENSIONI
        ====================================================== */
 
-    function updateDimensions(){
+   function updateDimensions() {
 
     const carouselWidth =
         viewport.getBoundingClientRect().width;
@@ -596,57 +596,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const gap =
         parseFloat(trackStyle.columnGap) || 0;
 
-
-    /*
-       Quattro immagini precise.
-    */
-
-    const visibleImages = 4;
-
-
-    /*
-       Spazio occupato dai tre gap.
-    */
+    // 3 immagini per il carosello speciale,
+    // 4 per quello originale.
+    const visibleImages =
+        carousel.classList.contains("carousel-three-square")
+            ? 3
+            : 4;
 
     const totalGaps =
         gap * (visibleImages - 1);
 
-
-    /*
-       Larghezza esatta di ogni immagine.
-    */
-
     const imageWidth =
-        (carouselWidth - totalGaps) /
-        visibleImages;
+        (carouselWidth - totalGaps) / visibleImages;
 
+    images.forEach(function(img) {
 
-    /*
-       Impostiamo SOLO la larghezza.
+        img.style.width = imageWidth + "px";
 
-       L'altezza viene calcolata automaticamente
-       dal browser mantenendo il rapporto originale
-       della fotografia.
-    */
-
-    images.forEach(function(img){
-
-        img.style.width =
-            imageWidth + "px";
-
-        img.style.height =
-            "auto";
+        if (carousel.classList.contains("carousel-three-square")) {
+            img.style.height = imageWidth + "px";
+            img.style.aspectRatio = "1 / 1";
+            img.style.objectFit = "cover";
+        } else {
+            img.style.height = "auto";
+            img.style.aspectRatio = "";
+            img.style.objectFit = "";
+        }
 
     });
 
-
-    /*
-       Un movimento corrisponde esattamente
-       a una foto + uno spazio.
-    */
-
     return imageWidth + gap;
-
 }
 
 
@@ -672,7 +651,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function next(){
 
         const maxIndex =
-            Math.max(0, images.length - 4);
+            Math.max(
+    0,
+    images.length - (
+        carousel.classList.contains("carousel-three-square")
+            ? 3
+            : 4
+    )
+)
 
 
         if(index < maxIndex){
@@ -713,7 +699,14 @@ document.addEventListener("DOMContentLoaded", function () {
             */
 
             index =
-                Math.max(0, images.length - 4);
+                Math.max(
+    0,
+    images.length - (
+        carousel.classList.contains("carousel-three-square")
+            ? 3
+            : 4
+    )
+)
 
         }
 

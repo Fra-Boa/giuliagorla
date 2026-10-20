@@ -1503,3 +1503,13 @@ body{
     }
 
 }
+
+
+/* ==========================================================
+   CAROSELLO SPECIALE — 3 IMMAGINI QUADRATE
+   ========================================================== */
+
+.vertical-carousel.carousel-three-square .vertical-carousel-track img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
