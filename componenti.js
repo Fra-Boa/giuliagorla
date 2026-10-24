@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // active link
-     const currentPage = window.location.pathname.split("/").pop();
+    const currentPage = window.location.pathname.split("/").pop();
 
     document.querySelectorAll(".menu a").forEach(link => {
         if (link.getAttribute("href") === currentPage) {
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hamburger.addEventListener("click", () => {
         sidebar.classList.toggle("open");
     });
- 
+
     /* =========================
        CAROUSEL + THUMBNAILS
     ========================= */
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let index = 0;
 
-    function showImage(i){
+    function showImage(i) {
         images.forEach(img => img.classList.remove("active"));
         thumbs.forEach(t => t.classList.remove("active-thumb"));
 
@@ -65,12 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
         index = i;
     }
 
-    function next(){
+    function next() {
         index = (index + 1) % images.length;
         showImage(index);
     }
 
-    function prev(){
+    function prev() {
         index = (index - 1 + images.length) % images.length;
         showImage(index);
     }
@@ -147,7 +147,7 @@ if (
        MOSTRA FOTO
        ========================= */
 
-    function showImage(){
+    function showImage() {
 
         const image = galleryImages[currentImage];
 
@@ -161,11 +161,11 @@ if (
        FOTO SUCCESSIVA
        ========================= */
 
-    function nextImage(){
+    function nextImage() {
 
         currentImage++;
 
-        if(currentImage >= galleryImages.length){
+        if (currentImage >= galleryImages.length) {
             currentImage = 0;
         }
 
@@ -178,11 +178,11 @@ if (
        FOTO PRECEDENTE
        ========================= */
 
-    function previousImage(){
+    function previousImage() {
 
         currentImage--;
 
-        if(currentImage < 0){
+        if (currentImage < 0) {
             currentImage = galleryImages.length - 1;
         }
 
@@ -221,7 +221,7 @@ if (
        CHIUDI LIGHTBOX
        ========================= */
 
-    function closeLightbox(){
+    function closeLightbox() {
 
         lightbox.classList.remove("active");
 
@@ -245,7 +245,7 @@ if (
 
     lightbox.addEventListener("click", (event) => {
 
-        if(event.target === lightbox){
+        if (event.target === lightbox) {
 
             closeLightbox();
 
@@ -260,19 +260,19 @@ if (
 
     document.addEventListener("keydown", (event) => {
 
-        if(!lightbox.classList.contains("active")){
+        if (!lightbox.classList.contains("active")) {
             return;
         }
 
-        if(event.key === "Escape"){
+        if (event.key === "Escape") {
             closeLightbox();
         }
 
-        if(event.key === "ArrowRight"){
+        if (event.key === "ArrowRight") {
             nextImage();
         }
 
-        if(event.key === "ArrowLeft"){
+        if (event.key === "ArrowLeft") {
             previousImage();
         }
 
@@ -504,7 +504,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                 },
-                { once:true }
+                { once: true }
             );
 
         }
@@ -585,55 +585,55 @@ document.addEventListener("DOMContentLoaded", function () {
        DIMENSIONI
        ====================================================== */
 
-   function updateDimensions() {
+    function updateDimensions() {
 
-    const carouselWidth =
-        viewport.getBoundingClientRect().width;
+        const carouselWidth =
+            viewport.getBoundingClientRect().width;
 
-    const trackStyle =
-        window.getComputedStyle(track);
+        const trackStyle =
+            window.getComputedStyle(track);
 
-    const gap =
-        parseFloat(trackStyle.columnGap) || 0;
+        const gap =
+            parseFloat(trackStyle.columnGap) || 0;
 
-    // 3 immagini per il carosello speciale,
-    // 4 per quello originale.
-    const visibleImages =
-        carousel.classList.contains("carousel-three-square")
-            ? 3
-            : 4;
+        // 3 immagini per il carosello speciale,
+        // 4 per quello originale.
+        const visibleImages =
+            carousel.classList.contains("carousel-three-square")
+                ? 3
+                : 4;
 
-    const totalGaps =
-        gap * (visibleImages - 1);
+        const totalGaps =
+            gap * (visibleImages - 1);
 
-    const imageWidth =
-        (carouselWidth - totalGaps) / visibleImages;
+        const imageWidth =
+            (carouselWidth - totalGaps) / visibleImages;
 
-    images.forEach(function(img) {
+        images.forEach(function (img) {
 
-        img.style.width = imageWidth + "px";
+            img.style.width = imageWidth + "px";
 
-        if (carousel.classList.contains("carousel-three-square")) {
-            img.style.height = imageWidth + "px";
-            img.style.aspectRatio = "1 / 1";
-            img.style.objectFit = "cover";
-        } else {
-            img.style.height = "auto";
-            img.style.aspectRatio = "";
-            img.style.objectFit = "";
-        }
+            if (carousel.classList.contains("carousel-three-square")) {
+                img.style.height = imageWidth + "px";
+                img.style.aspectRatio = "1 / 1";
+                img.style.objectFit = "cover";
+            } else {
+                img.style.height = "auto";
+                img.style.aspectRatio = "";
+                img.style.objectFit = "";
+            }
 
-    });
+        });
 
-    return imageWidth + gap;
-}
+        return imageWidth + gap;
+    }
 
 
     /* ======================================================
        AGGIORNA CAROUSEL
        ====================================================== */
 
-    function updateCarousel(){
+    function updateCarousel() {
 
         const step =
             updateDimensions();
@@ -648,24 +648,24 @@ document.addEventListener("DOMContentLoaded", function () {
        NEXT
        ====================================================== */
 
-    function next(){
+    function next() {
 
         const maxIndex =
             Math.max(
-    0,
-    images.length - (
-        carousel.classList.contains("carousel-three-square")
-            ? 3
-            : 4
-    )
-)
+                0,
+                images.length - (
+                    carousel.classList.contains("carousel-three-square")
+                        ? 3
+                        : 4
+                )
+            )
 
 
-        if(index < maxIndex){
+        if (index < maxIndex) {
 
             index++;
 
-        }else{
+        } else {
 
             /*
                Arrivati alla fine,
@@ -685,13 +685,13 @@ document.addEventListener("DOMContentLoaded", function () {
        PREV
        ====================================================== */
 
-    function prev(){
+    function prev() {
 
-        if(index > 0){
+        if (index > 0) {
 
             index--;
 
-        }else{
+        } else {
 
             /*
                Se siamo all'inizio,
@@ -700,13 +700,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             index =
                 Math.max(
-    0,
-    images.length - (
-        carousel.classList.contains("carousel-three-square")
-            ? 3
-            : 4
-    )
-)
+                    0,
+                    images.length - (
+                        carousel.classList.contains("carousel-three-square")
+                            ? 3
+                            : 4
+                    )
+                )
 
         }
 
@@ -719,7 +719,7 @@ document.addEventListener("DOMContentLoaded", function () {
        BOTTONI
        ====================================================== */
 
-    if(nextButton){
+    if (nextButton) {
 
         nextButton.addEventListener(
             "click",
@@ -728,7 +728,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    if(prevButton){
+    if (prevButton) {
 
         prevButton.addEventListener(
             "click",
@@ -748,7 +748,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     viewport.addEventListener(
         "touchstart",
-        function(event){
+        function (event) {
 
             startX =
                 event.touches[0].clientX;
@@ -757,13 +757,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.touches[0].clientY;
 
         },
-        { passive:true }
+        { passive: true }
     );
 
 
     viewport.addEventListener(
         "touchend",
-        function(event){
+        function (event) {
 
             const endX =
                 event.changedTouches[0].clientX;
@@ -779,17 +779,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 endY - startY;
 
 
-            if(
+            if (
                 Math.abs(differenceX) > 40 &&
                 Math.abs(differenceX) >
                 Math.abs(differenceY)
-            ){
+            ) {
 
-                if(differenceX < 0){
+                if (differenceX < 0) {
 
                     next();
 
-                }else{
+                } else {
 
                     prev();
 
@@ -798,7 +798,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
         },
-        { passive:true }
+        { passive: true }
     );
 
 
@@ -810,12 +810,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener(
         "resize",
-        function(){
+        function () {
 
             clearTimeout(resizeTimer);
 
             resizeTimer = setTimeout(
-                function(){
+                function () {
 
                     updateCarousel();
 
@@ -832,7 +832,7 @@ document.addEventListener("DOMContentLoaded", function () {
        ====================================================== */
 
     setTimeout(
-        function(){
+        function () {
 
             updateCarousel();
 
@@ -851,12 +851,12 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 
     const sections = document.querySelectorAll(".menu-section");
- 
+
     /* ======================================================
        APERTURA E CHIUSURA DEI SOTTOMENU
        ====================================================== */
 
- sections.forEach(function (section) {
+    sections.forEach(function (section) {
 
         // Cerca esclusivamente il pulsante figlio diretto
         const button = Array.from(section.children).find(
