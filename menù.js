@@ -2,20 +2,42 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================
-       STRUTTURA DEL MENU
+       CONFIGURAZIONE UNICA DEL MENU
     ====================================== */
 
     const menuData = [
         {
             title: "DOCUMENTARY",
             children: [
-                { label: "FATTORE UMANO", href: "fattore_umano.html" },
-                { label: "YOUNG ROOTS: back to old trades", href: "young_roots.html" }
+                {
+                    label: "FATTORE UMANO",
+                    href: "fattore_umano.html"
+                },
+                {
+                    label: "YOUNG ROOTS: back to old trades",
+                    href: "young_roots.html"
+                }
             ]
         },
         {
             title: "COMMITTED",
             children: [
+                {
+                    label: "LEGAMBIENTE - DIVERSAMENTE MARINAI",
+                    href: "legambiente.html"
+                },
+                {
+                    label: "ARTKADEMY - ISTITUTO SVIZZERO",
+                    href: "artkademy.html"
+                },
+                {
+                    label: "DAR CASA",
+                    href: "dar_casa.html"
+                },
+                {
+                    label: "SOS - VILLAGGIO DEI BAMBINI",
+                    href: "sos.html"
+                },
                 {
                     title: "CROCE ROSSA ITALIANA",
                     children: [
@@ -28,31 +50,57 @@ document.addEventListener("DOMContentLoaded", () => {
                             href: "leopoli.html"
                         }
                     ]
-                },
-                { label: "DAR CASA", href: "dar_casa.html" },
-                { label: "SOS - VILLAGGIO DEI BAMBINI", href: "sos.html" },
-                { label: "LEGAMBIENTE - DIVERSAMENTE MARINAI", href: "legambiente.html" },
-                { label: "ARTKADEMY - ISTITUTO SVIZZERO", href: "artkademy.html" }
+                }
             ]
         },
         {
             title: "NEWS",
             children: [
-                { label: "BLACK LIVES MATTER", href: "black_lives_matter.html" },
-                { label: "NON UNA DI MENO - Roma", href: "num_roma.html" },
-                { label: "NON UNA DI MENO - Milano", href: "num_milano.html" },
-                { label: "QUE VIVA ASKATASUNA", href: "aska.html" },
-                { label: "MANIFESTAZIONI PRO PAL", href: "pro_pal.html" },
-                { label: "NO TAV", href: "no_tav.html" }
+                {
+                    label: "NO TAV",
+                    href: "no_tav.html"
+                },
+                {
+                    label: "MANIFESTAZIONI PRO PAL",
+                    href: "pro_pal.html"
+                },
+                {
+                    label: "QUE VIVA ASKATASUNA",
+                    href: "aska.html"
+                },
+                {
+                    label: "NON UNA DI MENO - Milano",
+                    href: "num_milano.html"
+                },
+                {
+                    label: "NON UNA DI MENO - Roma",
+                    href: "num_roma.html"
+                },
+                {
+                    label: "BLACK LIVES MATTER",
+                    href: "black_lives_matter.html"
+                }
             ]
         },
         {
             title: "PERSONAL",
             children: [
-                { label: "ANAESTHETIC BEAUTY", href: "anaesthetic_beauty.html" },
-                { label: "CARTOLINE D'ARCHIVIO", href: "cartoline_d_archivio.html" },
-                { label: "FLUIDO AEREO", href: "fluido_aereo.html" }
+                {
+                    label: "ANAESTHETIC BEAUTY",
+                    href: "anaesthetic_beauty.html"
+                },
+                {
+                    label: "CARTOLINE D'ARCHIVIO",
+                    href: "cartoline_d_archivio.html"
+                },
+                {
+                    label: "FLUIDO AEREO",
+                    href: "fluido_aereo.html"
+                }
             ]
+        },
+        {
+            title: "PORTRAITS"
         }
     ];
 
@@ -71,16 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     /* ======================================
-       ELEMENTI DEL MENU
+       ELEMENTI HTML
     ====================================== */
 
     const menu = document.getElementById("site-menu");
     const secondary = document.getElementById("site-secondary");
 
     if (!menu || !secondary) return;
-
-    const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
 
     /* ======================================
        CREA UN LINK
@@ -90,13 +135,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const li = document.createElement("li");
         li.className = "menu-section";
 
-        const a = document.createElement("a");
-        a.href = item.href;
-        a.textContent = item.label;
+        const link = document.createElement("a");
+        link.href = item.href;
+        link.textContent = item.label;
 
-        if (className) a.className = className;
+        if (className) {
+            link.className = className;
+        }
 
-        li.appendChild(a);
+        li.appendChild(link);
 
         return li;
     }
@@ -117,11 +164,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = document.createElement("span");
         title.textContent = item.title;
 
+        button.appendChild(title);
+
+        // Le sezioni senza sottovoci, come PORTRAITS,
+        // mantengono il comportamento del menu originale.
+        if (!item.children || item.children.length === 0) {
+            const arrow = document.createElement("span");
+            arrow.className = "menu-arrow";
+            arrow.textContent = ">";
+
+            button.appendChild(arrow);
+            li.appendChild(button);
+
+            return li;
+        }
+
         const arrow = document.createElement("span");
         arrow.className = "menu-arrow";
         arrow.textContent = ">";
 
-        button.append(title, arrow);
+        button.appendChild(arrow);
         li.appendChild(button);
 
         const submenu = document.createElement("ul");
@@ -137,10 +199,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         li.appendChild(submenu);
 
-        // Apertura/chiusura del sottomenu
+        // Apre o chiude soltanto la sezione cliccata.
         button.addEventListener("click", () => {
             const isOpen = li.classList.toggle("open");
-            button.setAttribute("aria-expanded", String(isOpen));
+
+            button.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
         });
 
         return li;
@@ -156,10 +222,12 @@ document.addEventListener("DOMContentLoaded", () => {
         menu.appendChild(createSection(item));
     });
 
-    // Spazio prima di Portfolio e Tearsheet
+    // Mantiene lo spazio presente tra PORTRAITS
+    // e PORTFOLIO nel menu originale.
     const spacer = document.createElement("li");
     spacer.className = "menu-spacer";
     spacer.setAttribute("aria-hidden", "true");
+
     menu.appendChild(spacer);
 
     mainLinks.forEach(item => {
@@ -167,22 +235,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* ======================================
-       LINK SECONDARI
+       GENERA IL MENU SECONDARIO
     ====================================== */
 
     secondary.replaceChildren();
 
     secondaryLinks.forEach(item => {
-        const a = document.createElement("a");
-        a.href = item.href;
-        a.textContent = item.label;
+        const link = document.createElement("a");
+        link.href = item.href;
+        link.textContent = item.label;
 
-        secondary.appendChild(a);
+        secondary.appendChild(link);
     });
 
     /* ======================================
-       PAGINA ATTIVA + APERTURA GENITORI
+       PAGINA ATTIVA E SEZIONI GENITRICI
     ====================================== */
+
+    const currentPage =
+        window.location.pathname.split("/").pop() || "index.html";
 
     menu.querySelectorAll("a[href]").forEach(link => {
         const href = link.getAttribute("href");
@@ -191,6 +262,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         link.classList.add("active");
 
+        // Apre anche tutte le sezioni genitrici
+        // del link attivo, comprese quelle annidate.
         let parent = link.closest(".menu-section");
 
         while (parent) {
@@ -204,7 +277,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 button.setAttribute("aria-expanded", "true");
             }
 
-            parent = parent.parentElement.closest(".menu-section");
+            const parentList = parent.parentElement;
+
+            parent = parentList
+                ? parentList.closest(".menu-section")
+                : null;
         }
     });
 
@@ -216,9 +293,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const sidebar = document.getElementById("sidebar");
 
     if (hamburger && sidebar) {
+        hamburger.setAttribute("aria-expanded", "false");
+
         hamburger.addEventListener("click", () => {
             const isOpen = sidebar.classList.toggle("open");
-            hamburger.setAttribute("aria-expanded", String(isOpen));
+
+            hamburger.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
         });
     }
 
