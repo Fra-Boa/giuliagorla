@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /*   // active link
+// active link
     const currentPage = window.location.pathname.split("/").pop();
 
     document.querySelectorAll(".menu a").forEach(link => {
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hamburger.addEventListener("click", () => {
         sidebar.classList.toggle("open");
-    });*/
+    });
 
     /* =========================
        CAROUSEL + THUMBNAILS
@@ -848,15 +848,15 @@ document.addEventListener("DOMContentLoaded", function () {
    MENU A SCOMPARSA — SUPPORTO MENU ANNIDATI
    ========================================================== */
 
-/* document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const sections = document.querySelectorAll(".menu-section");*/
+    const sections = document.querySelectorAll(".menu-section");
 
     /* ======================================================
        APERTURA E CHIUSURA DEI SOTTOMENU
        ====================================================== */
 
-   /* sections.forEach(function (section) {
+    sections.forEach(function (section) {
 
         // Cerca esclusivamente il pulsante figlio diretto
         const button = Array.from(section.children).find(
@@ -880,15 +880,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
-    });*/
+    });
 
 
     /* ======================================================
        EVIDENZIAZIONE DELLA PAGINA ATTIVA
        ====================================================== */
 
-    /* const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
+    const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
 
     const links = document.querySelectorAll(".menu a[href]");
 
@@ -927,4 +927,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-}); */
+}); 
