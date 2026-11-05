@@ -382,8 +382,8 @@ PAGINE PROGETTO — LAYOUT DESKTOP
 ========================================================== */
 
 .project {
-    margin-left: 30vw;
-    width: 68vw;
+    margin-left: 27vw;
+    width: 73vw;
 
     font-variant-numeric: oldstyle-nums;
 
@@ -621,7 +621,7 @@ PAGINE PROGETTO — LAYOUT DESKTOP
 .carousel-thumbs img {
     height: 60px;
     width: auto;
-    
+
     display: block;
     margin: 0;
     padding: 0;
