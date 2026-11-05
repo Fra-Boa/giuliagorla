@@ -73,14 +73,24 @@ body {
     position: fixed;
     top: 24px;
     left: 24px;
-
-    width: 34vw;
-    max-width: 540px;
-
+    width: 32vw;
+    max-width: 420px;
     display: flex;
     flex-direction: column;
 }
 
+
+.sidebar {
+    width: 100%;
+    max-width: 420px;
+}
+
+.menu a,
+.menu button {
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: break-word;
+}
 
 /* ==========================================================
    TITOLO
