@@ -382,6 +382,7 @@ PAGINE PROGETTO — LAYOUT DESKTOP
 ========================================================== */
 
 .project {
+    box-sizing: border-box;
     margin-left: 23vw;
     width: 77vw;
 
@@ -481,6 +482,7 @@ PAGINE PROGETTO — LAYOUT DESKTOP
 
 .gallery {
     margin-top: 4rem;
+    width: 100%;
 
     display: grid;
 
