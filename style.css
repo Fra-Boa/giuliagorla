@@ -74,7 +74,7 @@ body {
     top: 24px;
     left: 24px;
     width: 32vw;
-    max-width: 265px;
+    max-width: 260px;
     display: flex;
     flex-direction: column;
 }
@@ -82,7 +82,7 @@ body {
 
 .sidebar {
     width: 100%;
-    max-width: 265px;
+    max-width: 420px;
 }
 
 .menu a,
